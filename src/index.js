@@ -1,11 +1,11 @@
-import fs from 'fs';
-import path from 'path';
 import _ from 'lodash';
+import readFile from './helpers/readFile.js';
+import getFixturePath from './helpers/getFixturePath.js';
 
 const genDiff = (file1, file2) => {
   const result = [];
-  const data1 = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), file1)));
-  const data2 = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), file2)));
+  const data1 = JSON.parse(readFile(getFixturePath(file1)));
+  const data2 = JSON.parse(readFile(getFixturePath(file2)));
 
   const keys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
 

@@ -1,0 +1,31 @@
+name: Test
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: make install
+      - name: Run Tests
+        run: make test
+  coverage:
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: make install
+      - name: Run test coverage
+        uses: paambaati/codeclimate-action@v2.7.2
+        env:
+          CC_TEST_REPORTER_ID: 59d241b2ce2654b7b5825c4b0bac0f6640e3282ec5d234cc13c845b0b92b82eb
+        with:
+          coverageCommand: make test-coverage
+          debug: true

@@ -4,6 +4,15 @@ install:
 publish:
 	npm publish --dry-run
 
+test:
+	npm test
+
+test-coverage:
+	npm test -- --coverage
+
+test-watch:
+	cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --bail --watch
+
 lint:
 	npx eslint .
 
